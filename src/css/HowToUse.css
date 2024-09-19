@@ -36,3 +36,10 @@
 .how-to-use-content p {
   margin-top: 20px;
 }
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 40px;
+}
