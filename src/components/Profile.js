@@ -7,7 +7,7 @@ const Profile = ({ profile }) => {
 
   return (
     <div className="profile-card">
-      <h2>User Profile</h2>
+      <h3>Profile</h3>
       <div className="profile-info-row">
         <strong>Username:</strong> <span>{profile.username}</span>
       </div>

@@ -98,9 +98,6 @@ const Analyze = ({ profile, setProfile }) => {
 
   return (
     <div className="main-container">
-      <div className="profile-container">
-        <Profile profile={profile} />
-      </div>
       <div className="form-container">
         <InputForm onSubmit={handleAnalyze} />
       </div>

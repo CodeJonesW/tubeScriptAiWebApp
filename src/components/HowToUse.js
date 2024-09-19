@@ -1,14 +1,14 @@
 import React from "react";
-import "../css/HowToUse.css"; // Import the CSS for this component
+import "../css/HowToUse.css";
 
-const HowToUseCard = () => {
+const HowToUseCard = ({ displayComponent }) => {
   return (
     <div className="how-to-use-card">
-      <h2 className="how-to-use-title">How to Use This Web App</h2>
+      <h2 className="how-to-use-title">How to Use</h2>
       <div className="how-to-use-content">
         <p>
-          Welcome to the AI Video Analysis App! This app allows you to upload
-          YouTube videos and analyze them using AI. Here's how to get started:
+          Welcome to TubeScript.Ai! This app allows you to upload YouTube videos
+          and analyze them using AI. Here's how to get started:
         </p>
         <ol>
           <li>
@@ -39,6 +39,23 @@ const HowToUseCard = () => {
           minutes you have left, check your profile at any time.
         </p>
         <p>Enjoy using our AI-powered video analysis app!</p>
+        <div
+          className="button-group"
+          style={{ margin: "40px, 60px, 0px, 60px" }}
+        >
+          <button
+            onClick={() => displayComponent("register")}
+            className="primary-button"
+          >
+            Register
+          </button>
+          <button
+            onClick={() => displayComponent("login")}
+            className="primary-button"
+          >
+            Log In
+          </button>
+        </div>
       </div>
     </div>
   );
