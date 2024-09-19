@@ -1,0 +1,38 @@
+.how-to-use-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 600px;
+  margin: 40px auto;
+}
+
+.how-to-use-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.how-to-use-content {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #555;
+}
+
+.how-to-use-content ol {
+  padding-left: 20px;
+}
+
+.how-to-use-content ol li {
+  margin-bottom: 10px;
+}
+
+.how-to-use-content strong {
+  color: #007bff;
+}
+
+.how-to-use-content p {
+  margin-top: 20px;
+}

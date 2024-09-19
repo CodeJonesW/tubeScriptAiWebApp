@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import InputForm from "./components/InputForm";
 import Results from "./components/Results";
 import Login from "./components/Login";
+import HowToUseCard from "./components/HowToUse";
 import Profile from "./components/Profile";
 import Register from "./components/Register";
 import axios from "axios";
@@ -139,6 +140,8 @@ const App = () => {
         </div>
       ) : null}
       <h1>TubeScript AI</h1>
+
+      <HowToUseCard />
 
       {!isAuthenticated ? (
         <div className="auth-container">
