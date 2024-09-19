@@ -21,23 +21,33 @@ const Register = ({ onRegister }) => {
   };
 
   return (
-    <div>
-      <h2>Register</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+    <div className="form-container">
+      <h2 className="form-title">Register</h2>
+      {error && <p className="error-message">{error}</p>}
       <form onSubmit={handleRegister}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Register</button>
+        <div className="input-group">
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="form-input"
+            required
+          />
+        </div>
+        <div className="input-group">
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="form-input"
+            required
+          />
+        </div>
+        <button type="submit" className="primary-button">
+          Register
+        </button>
       </form>
     </div>
   );

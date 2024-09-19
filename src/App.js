@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import Profile from "./components/Profile";
 import Register from "./components/Register";
 import axios from "axios";
+import "./App.css"; // Add this for global styles
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -53,7 +54,6 @@ const App = () => {
 
     try {
       const token = localStorage.getItem("authToken");
-      console.log("token", token);
       const response = await axios.post(
         "http://localhost:5000/process",
         {
@@ -130,33 +130,44 @@ const App = () => {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        padding: "20px",
-      }}
-    >
-      <h1>AI Video Analysis</h1>
+    <div className="app-container">
+      {isAuthenticated ? (
+        <div className="logout-container">
+          <button className="logout-button" onClick={handleLogout}>
+            Logout
+          </button>
+        </div>
+      ) : null}
+      <h1>TubeScript AI</h1>
 
       {!isAuthenticated ? (
-        <div>
-          <Login onLogin={handleLogin} />
-          <Register
-            onRegister={() => alert("Registered successfully! Please log in.")}
-          />
+        <div className="auth-container">
+          <div className="auth-form">
+            <Login onLogin={handleLogin} />
+          </div>
+          <div className="auth-form">
+            <Register
+              onRegister={() =>
+                alert("Registered successfully! Please log in.")
+              }
+            />
+          </div>
         </div>
       ) : (
-        <div>
-          <Profile profile={profile} />
-          <button onClick={handleLogout}>Logout</button>
-          <InputForm onSubmit={handleAnalyze} />
-          {loading ? <p>{status || "Processing..."}</p> : null}
-          {result ? <Results result={result} title="Analysis" /> : null}
-          {transcript ? (
-            <Results result={transcript} title={"Transcript"} />
-          ) : null}
+        <div className="main-container">
+          <div className="profile-container">
+            <Profile profile={profile} />
+          </div>
+          <div className="form-container">
+            <InputForm onSubmit={handleAnalyze} />
+          </div>
+          <div className="results-container">
+            {loading ? (
+              <p className="status-message">{status || "Processing..."}</p>
+            ) : null}
+            {result && <Results result={result} title="Analysis" />}
+            {transcript && <Results result={transcript} title="Transcript" />}
+          </div>
         </div>
       )}
     </div>

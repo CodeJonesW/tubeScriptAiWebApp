@@ -13,32 +13,29 @@ const InputForm = ({ onSubmit }) => {
   };
 
   return (
-    <div>
-      <form
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          width: "200px",
-          margin: "0 auto",
-        }}
-        onSubmit={handleSubmit}
-      >
-        <input
-          style={{ marginBottom: "10px" }}
-          type="text"
-          placeholder="Enter YouTube URL"
-          value={youtubeUrl}
-          onChange={(e) => setYoutubeUrl(e.target.value)}
-          required
-        />
-        <textarea
-          style={{ marginBottom: "10px" }}
-          placeholder="Enter your prompt (e.g., Summarize the video)"
-          value={prompt}
-          onChange={(e) => setPrompt(e.target.value)}
-          required
-        />
-        <button type="submit" disabled={loading}>
+    <div className="input-form">
+      <h2>Analyze YouTube Video</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="input-group">
+          <input
+            type="text"
+            placeholder="Enter YouTube URL"
+            value={youtubeUrl}
+            onChange={(e) => setYoutubeUrl(e.target.value)}
+            className="form-input"
+            required
+          />
+        </div>
+        <div className="input-group">
+          <textarea
+            placeholder="Enter your prompt (e.g., Summarize the video)"
+            value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}
+            className="form-textarea"
+            required
+          />
+        </div>
+        <button type="submit" className="primary-button" disabled={loading}>
           {loading ? "Processing..." : "Analyze Video"}
         </button>
       </form>
