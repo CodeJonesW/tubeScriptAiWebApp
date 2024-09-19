@@ -6,7 +6,7 @@ import HowToUseCard from "./components/HowToUse";
 import Profile from "./components/Profile";
 import Register from "./components/Register";
 import axios from "axios";
-import "./App.css"; // Add this for global styles
+import "./App.css";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -141,19 +141,20 @@ const App = () => {
       ) : null}
       <h1>TubeScript AI</h1>
 
-      <HowToUseCard />
-
       {!isAuthenticated ? (
-        <div className="auth-container">
-          <div className="auth-form">
-            <Login onLogin={handleLogin} />
-          </div>
-          <div className="auth-form">
-            <Register
-              onRegister={() =>
-                alert("Registered successfully! Please log in.")
-              }
-            />
+        <div>
+          <HowToUseCard />
+          <div className="auth-container">
+            <div className="auth-form">
+              <Login onLogin={handleLogin} />
+            </div>
+            <div className="auth-form">
+              <Register
+                onRegister={() =>
+                  alert("Registered successfully! Please log in.")
+                }
+              />
+            </div>
           </div>
         </div>
       ) : (
