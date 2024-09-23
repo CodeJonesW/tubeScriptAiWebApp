@@ -21,12 +21,13 @@ const App = () => {
   const [profile, setProfile] = useState(null);
   const [error, setError] = useState(null);
   const [displayComponent, setDisplayComponent] = useState("welcome");
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
         const token = localStorage.getItem("authToken");
-        const response = await axios.get("http://localhost:5000/profile", {
+        const response = await axios.get(`${apiUrl}/profile`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,

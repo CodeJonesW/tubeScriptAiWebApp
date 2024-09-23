@@ -8,13 +8,13 @@ const Register = ({ onRegister }) => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-
+    const apiUrl = process.env.REACT_APP_API_URL;
     try {
-      await axios.post("http://localhost:5000/register", {
+      await axios.post(`${apiUrl}/register`, {
         username: email,
         password,
       });
-      onRegister(); // Notify App component after successful registration
+      onRegister();
     } catch (err) {
       setError("Registration failed. Please try again.");
     }

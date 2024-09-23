@@ -16,20 +16,18 @@ const Analyze = ({ profile, setProfile }) => {
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   const pollTaskStatusService = (taskId) => {
     const intervalId = setInterval(async () => {
       try {
         const token = localStorage.getItem("authToken");
-        const statusResponse = await axios.get(
-          `http://localhost:5000/status/${taskId}`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const statusResponse = await axios.get(`${apiUrl}/status/${taskId}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         const taskStatus = statusResponse.data.status;
         const taskResult = statusResponse.data.result;
@@ -74,7 +72,7 @@ const Analyze = ({ profile, setProfile }) => {
     try {
       const token = localStorage.getItem("authToken");
       const response = await axios.post(
-        "http://localhost:5000/process",
+        `${apiUrl}/process`,
         {
           url: youtubeUrl,
           prompt: prompt,
