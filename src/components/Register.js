@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { validateEmail } from "../utils/account_verify";
 
 const Register = ({ onRegister }) => {
   const [email, setEmail] = useState("");
@@ -9,6 +10,12 @@ const Register = ({ onRegister }) => {
   const handleRegister = async (e) => {
     e.preventDefault();
     const apiUrl = process.env.REACT_APP_API_URL;
+
+    if (!validateEmail(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
     try {
       await axios.post(`${apiUrl}/register`, {
         username: email,

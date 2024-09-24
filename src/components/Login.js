@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { validateEmail } from "../utils/account_verify";
 
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState("");
@@ -9,6 +10,11 @@ const Login = ({ onLogin }) => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
+    if (!validateEmail(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
 
     try {
       const response = await axios.post(`${apiUrl}/login`, {
