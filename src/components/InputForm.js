@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const InputForm = ({ onSubmit }) => {
   const [youtubeUrl, setYoutubeUrl] = useState("");
-  const [prompt, setPrompt] = useState("");
+  const [prompt, setPrompt] = useState("summarize");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {

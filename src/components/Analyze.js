@@ -34,6 +34,12 @@ const Analyze = ({ profile, setProfile }) => {
 
         setStatus(taskStatus);
 
+        if (statusResponse.data.state === "NOT FOUND") {
+          setStatus("Error: Task not found.");
+          clearInterval(intervalId);
+          setLoading(false);
+        }
+
         if (statusResponse.data.state === "SUCCESS") {
           setResult(taskResult.analysis);
           setTranscript(taskResult.transcript);
@@ -87,7 +93,9 @@ const Analyze = ({ profile, setProfile }) => {
 
       const taskId = response.data.task_id;
       setTaskId(taskId);
-      pollTaskStatusService(taskId);
+      setTimeout(() => {
+        pollTaskStatusService(taskId);
+      }, 5000);
     } catch (error) {
       console.error("Error during analysis:", error);
       setLoading(false);
