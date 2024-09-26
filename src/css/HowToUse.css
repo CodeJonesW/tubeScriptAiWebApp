@@ -5,6 +5,9 @@
   padding: 20px;
   max-width: 600px;
   margin: 40px auto;
+  @media screen and (max-width: 768px) {
+    margin-bottom: 200px;
+  }
 }
 
 .how-to-use-title {
