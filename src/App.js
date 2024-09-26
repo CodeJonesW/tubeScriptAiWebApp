@@ -56,26 +56,29 @@ const App = () => {
     setDisplayComponent("welcome");
   };
 
-  return (
-    <div className="app-container">
-      {isAuthenticated ? (
-        <div style={{ width: "100%" }}>
-          <div className="nav-container">
-            <h2>TubeScript AI</h2>
-            <div className="logout-container">
-              <button className="logout-button" onClick={handleLogout}>
-                Logout
-              </button>
-            </div>
-          </div>
-          <div className="profile-container">
-            <Profile profile={profile} />
-          </div>
-        </div>
-      ) : null}
+  const BackButton = () => {
+    return (
+      <div style={{ width: "100%" }}>
+        <button
+          onClick={() => setDisplayComponent("welcome")}
+          style={{
+            width: "24px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          className="secondary-button"
+        >
+          {"<"}
+        </button>
+      </div>
+    );
+  };
 
+  return (
+    <>
       {!isAuthenticated ? (
-        <div>
+        <div className="onboarding-container">
           {displayComponent === "welcome" ? (
             <div>
               <h2>TubeScript.Ai</h2>
@@ -83,25 +86,46 @@ const App = () => {
             </div>
           ) : null}
           {displayComponent === "register" ? (
-            <div className="auth-form">
+            <>
+              <BackButton />
               <Register
+                back={() => setDisplayComponent("welcome")}
                 onRegister={() => {
                   alert("Registered successfully! Please log in.");
                   setDisplayComponent("login");
                 }}
               />
-            </div>
+            </>
           ) : null}
           {displayComponent === "login" ? (
-            <div className="auth-form">
-              <Login onLogin={handleLogin} />
-            </div>
+            <>
+              <BackButton />
+              <Login
+                back={() => setDisplayComponent("welcome")}
+                onLogin={handleLogin}
+              />
+            </>
           ) : null}
         </div>
       ) : (
-        <Analyze profile={profile} setProfile={setProfile} />
+        <div className="app-container">
+          <div style={{ width: "100%" }}>
+            <div className="nav-container">
+              <h2>TubeScript AI</h2>
+              <div className="logout-container">
+                <button className="logout-button" onClick={handleLogout}>
+                  Logout
+                </button>
+              </div>
+            </div>
+            <div className="profile-container">
+              <Profile profile={profile} />
+            </div>
+          </div>
+          <Analyze profile={profile} setProfile={setProfile} />
+        </div>
       )}
-    </div>
+    </>
   );
 };
 

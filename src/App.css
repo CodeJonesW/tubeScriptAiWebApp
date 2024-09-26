@@ -1,10 +1,23 @@
 /* Global Styles */
+html {
+  background-color: #f4f7f6;
+}
+
 body {
   font-family: "Arial", sans-serif;
   background-color: #f4f7f6;
   color: #333;
   margin: 0;
   padding: 0;
+  /* height: 100vh; */
+}
+
+.onboarding-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
 
 h1 {
@@ -38,18 +51,17 @@ h2 {
 }
 
 .auth-form {
-  width: 100%;
+  /* width: 100%; */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 20px;
   max-width: 400px;
-  padding: 40px;
 }
 
 .form-container {
-  width: 100%;
+  /* width: 100%; */
   display: flex;
   flex-direction: column;
   align-items: center;
