@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-const InputForm = ({ onSubmit }) => {
-  const [youtubeUrl, setYoutubeUrl] = useState("");
+const InputForm = ({ onSubmit, analyzing, error, status }) => {
+  const [youtubeUrl, setYoutubeUrl] = useState("https://vimeo.com/154191595");
   const [prompt, setPrompt] = useState("summarize");
   const [loading, setLoading] = useState(false);
 
@@ -14,7 +14,6 @@ const InputForm = ({ onSubmit }) => {
 
   return (
     <div className="input-form">
-      <h2>Analyze YouTube Video</h2>
       <form onSubmit={handleSubmit}>
         <div className="input-group">
           <input
@@ -35,9 +34,18 @@ const InputForm = ({ onSubmit }) => {
             required
           />
         </div>
-        <button type="submit" className="primary-button" disabled={loading}>
-          {loading ? "Processing..." : "Analyze Video"}
+        <button
+          type="submit"
+          className="primary-button"
+          disabled={loading || analyzing}
+        >
+          {loading || analyzing ? (
+            <p className="status-message">{status || "Processing..."}</p>
+          ) : (
+            "Analyze Video"
+          )}
         </button>
+        {error ? <p className="error-message">{error}</p> : null}
       </form>
     </div>
   );

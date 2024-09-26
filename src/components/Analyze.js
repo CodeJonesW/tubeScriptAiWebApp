@@ -34,12 +34,6 @@ const Analyze = ({ profile, setProfile }) => {
 
         setStatus(taskStatus);
 
-        if (statusResponse.data.state === "NOT FOUND") {
-          setStatus("Error: Task not found.");
-          clearInterval(intervalId);
-          setLoading(false);
-        }
-
         if (statusResponse.data.state === "SUCCESS") {
           setResult(taskResult.analysis);
           setTranscript(taskResult.transcript);
@@ -98,19 +92,25 @@ const Analyze = ({ profile, setProfile }) => {
       }, 5000);
     } catch (error) {
       console.error("Error during analysis:", error);
-      setLoading(false);
+      if (error.response.data.error) {
+        setError(error.response.data.error);
+        setLoading(false);
+        return;
+      }
     }
   };
 
   return (
     <div className="main-container">
       <div className="form-container">
-        <InputForm onSubmit={handleAnalyze} />
+        <InputForm
+          analyzing={loading}
+          onSubmit={handleAnalyze}
+          error={error}
+          status={status}
+        />
       </div>
       <div className="results-container">
-        {loading ? (
-          <p className="status-message">{status || "Processing..."}</p>
-        ) : null}
         {result && <Results result={result} title="Analysis" />}
         {transcript && <Results result={transcript} title="Transcript" />}
       </div>
