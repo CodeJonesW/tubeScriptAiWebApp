@@ -37,6 +37,7 @@ const App = () => {
         setDisplayComponent("analyze");
       } catch (error) {
         setError("Failed to fetch profile");
+        setIsAuthenticated(false);
         console.error(error);
       }
     };
@@ -58,7 +59,7 @@ const App = () => {
 
   const BackButton = () => {
     return (
-      <div style={{ width: "100%" }}>
+      <div style={{ width: "100%", marginBottom: "44px" }}>
         <button
           onClick={() => setDisplayComponent("welcome")}
           style={{
