@@ -1,18 +1,12 @@
 import React, { useState } from "react";
 import "../css/HowToUse.css"; // Import the CSS for this component
-import Profile from "./Profile";
-import Register from "./Register";
 import InputForm from "./InputForm";
 import Results from "./Results";
 import axios from "axios";
 
 const Analyze = ({ profile, setProfile }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    !!localStorage.getItem("authToken")
-  );
   const [result, setResult] = useState("");
   const [transcript, setTranscript] = useState("");
-  const [taskId, setTaskId] = useState(null);
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -59,11 +53,6 @@ const Analyze = ({ profile, setProfile }) => {
   };
 
   const handleAnalyze = async (youtubeUrl, prompt) => {
-    if (!isAuthenticated) {
-      alert("You need to log in to use this feature!");
-      return;
-    }
-
     setLoading(true);
     setResult("");
     setStatus("");
@@ -86,7 +75,6 @@ const Analyze = ({ profile, setProfile }) => {
       );
 
       const taskId = response.data.task_id;
-      setTaskId(taskId);
       setTimeout(() => {
         pollTaskStatusService(taskId);
       }, 5000);

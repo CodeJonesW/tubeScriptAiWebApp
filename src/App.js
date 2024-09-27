@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import InputForm from "./components/InputForm";
 import Profile from "./components/Profile";
-import Results from "./components/Results";
 import Login from "./components/Login";
 import HowToUseCard from "./components/HowToUse";
 import Register from "./components/Register";
@@ -13,30 +11,25 @@ const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(
     !!localStorage.getItem("authToken")
   );
-  const [result, setResult] = useState("");
-  const [transcript, setTranscript] = useState("");
-  const [taskId, setTaskId] = useState(null);
-  const [status, setStatus] = useState("");
-  const [loading, setLoading] = useState(false);
   const [profile, setProfile] = useState(null);
-  const [error, setError] = useState(null);
   const [displayComponent, setDisplayComponent] = useState("welcome");
-  const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
         const token = localStorage.getItem("authToken");
-        const response = await axios.get(`${apiUrl}/profile`, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/profile`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         setProfile(response.data);
         setDisplayComponent("analyze");
       } catch (error) {
-        setError("Failed to fetch profile");
         setIsAuthenticated(false);
         console.error(error);
       }
